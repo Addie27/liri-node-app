@@ -31,15 +31,35 @@ var LiriSearch = function () {
           return console.log('Error occurred: ' + err);
         }
         var info = data.tracks.items
+        console.log(JSON.stringify(data, null, 2))
         console.log(
           "\nArtist: " + info[0].artists[0].name +
           "\nSong title: " + info[0].name +
           "\nAlbum name: " + info[0].album.name +
           "\nURL Preview: " + info[0].preview_url)
-        
+
       })
     })
   }//spotify ends
+
+  this.aceOfBase = function () {
+    
+    spotify
+      .request('https://api.spotify.com/v1/tracks/3DYVWvPh3kGwPasp7yjahc')
+      .then(function (data) {
+        // console.log(JSON.stringify(data, null, 2))
+        var info = data.album
+        
+        console.log(
+          "\nArtist: " + info.artists[0].name +
+          "\nSong title: " + data.name +
+          "\nAlbum name: " + info.name +
+          "\nURL Preview: " + data.preview_url)
+      })
+      .catch(function (err) {
+        console.error('Error occurred: ' + err);
+      });
+  }
 
 }; //lirisearch ends
 
