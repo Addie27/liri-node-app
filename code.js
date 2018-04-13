@@ -68,10 +68,20 @@ var LiriSearch = function () {
         return console.log(error);
       }
       var movieData = movie;
-      console.log(movieData); 
-
+   
       request("https://www.omdbapi.com/?t=" + movieData + "&y=&plot=short&apikey=trilogy", function (error, response) {
-        console.log(JSON.stringify(response, null, 2));
+        // console.log(JSON.stringify(response, null, 2));
+        var stuff = JSON.parse(response.body); 
+      
+        console.log(
+          "\nMovie Title: " + stuff.Title +
+          "\nRelease Year: " + stuff.Year +
+          "\nIMDB Rating: " + stuff.imdbRating +
+          "\nRotten Tomatoes: " + stuff.Ratings +
+          "\nCountry produced: " + stuff.Country +
+          "\nLanguage: " + stuff.Language +
+          "\nPlot: " + stuff.Plot +
+          "\nActors: " + stuff.Actors)
 
         });
        
