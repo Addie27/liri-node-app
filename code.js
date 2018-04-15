@@ -9,6 +9,8 @@ var request = require('request');
 var spotify = new Spotify(keys.spotify);
 var twitter = new Twitter(keys.twitter);
 
+
+
 var LiriSearch = function () {
   this.twitter = function () {
     var params = { screen_name: 'addiesgjohnson', count: 20 };
@@ -25,7 +27,7 @@ var LiriSearch = function () {
       if (error) {
         return console.log(error);
       }
-      var songData = song;
+      var songData = song.slice(17);
 
       spotify.search({ type: 'track', query: songData, limit: 1 }, function (err, data) {
         if (err) {
@@ -63,28 +65,40 @@ var LiriSearch = function () {
   }//aceOfBase ends
 
   this.movie = function () {
-    fs.readFile("movie.txt", "utf8", function (error, movie) {
+    fs.readFile("random.txt", "utf8", function (error, movie) {
       if (error) {
         return console.log(error);
       }
-      var movieData = movie;
-   
+
+      var movieData = movie.slice(11);
+
       request("https://www.omdbapi.com/?t=" + movieData + "&y=&plot=short&apikey=trilogy", function (error, response) {
         // console.log(JSON.stringify(response, null, 2));
-        var stuff = JSON.parse(response.body); 
-      
+        var stuff = JSON.parse(response.body);
+
+        array = stuff.Ratings;
+
+        function search(nameKey, myArray) {
+          for (var i = 0; i < myArray.length; i++) {
+            if (myArray[i].Source === nameKey) {
+              return myArray[i];
+            }
+          }
+        }
+        var resultObject = search("Rotten Tomatoes", array);
+
         console.log(
           "\nMovie Title: " + stuff.Title +
           "\nRelease Year: " + stuff.Year +
           "\nIMDB Rating: " + stuff.imdbRating +
-          "\nRotten Tomatoes: " + stuff.Ratings +
+          "\nRotten Tomatoes: " + resultObject.Value +
           "\nCountry produced: " + stuff.Country +
           "\nLanguage: " + stuff.Language +
           "\nPlot: " + stuff.Plot +
           "\nActors: " + stuff.Actors)
 
-        });
-       
+      });
+
     });
   } //this.movie end
 

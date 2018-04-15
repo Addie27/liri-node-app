@@ -14,7 +14,7 @@ else if (request === "spotify-this-song") {
         liri.aceOfBase(); 
     }
     else {
-        fs.writeFile("random.txt", input, function (err) {
+        fs.writeFile("random.txt", request + " " + input, function (err) {
             if (err) {
                 console.log(err);
             }
@@ -28,7 +28,7 @@ else if (request ===  "movie-this") {
         console.log("no movie");  
     }
     else {
-        fs.writeFile("movie.txt", input, function (err) {
+        fs.writeFile("random.txt", request + " " + input, function (err) {
             if (err) {
                 console.log(err);
             }
@@ -36,9 +36,15 @@ else if (request ===  "movie-this") {
             liri.movie();
         })
     }
-
 }
 
-
+else if (request ===  "do-what-it-says") {
+    fs.writeFile("random.txt", request + "I Want It That Way", function (err) {
+        if (err) {
+            console.log(err);
+        }
+        liri.spotify(); 
+}); 
+} 
 
 
