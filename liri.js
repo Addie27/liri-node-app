@@ -25,7 +25,13 @@ else if (request === "spotify-this-song") {
 }
 else if (request ===  "movie-this") {
     if (input === undefined) {
-        console.log("no movie");  
+        fs.writeFile("random.txt", request + "'Mr. Nobody'", function (err) {
+            if (err) {
+                console.log(err);
+            }
+            
+            liri.movie();
+        })  
     }
     else {
         fs.writeFile("random.txt", request + " " + input, function (err) {

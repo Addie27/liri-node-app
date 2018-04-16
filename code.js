@@ -82,8 +82,9 @@ var LiriSearch = function () {
       if (error) {
         return console.log(error);
       }
-      
+      console.log(movie);
       var movieData = movie.slice(11);
+      console.log(movieData);
 
       request("https://www.omdbapi.com/?t=" + movieData + "&y=&plot=short&apikey=trilogy", function (error, response) {
         var stuff = JSON.parse(response.body);
