@@ -6,7 +6,7 @@ var input = process.argv[3];
 
 var liri = new liriRequest();
 
-fs.appendFile("log.txt", request + " " + input, function (err) {
+fs.appendFile("log.txt", request + " " + input + " ", function (err) {
     if (err) {
         console.log(err);
     }

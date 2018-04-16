@@ -16,20 +16,15 @@ var LiriSearch = function () {
     var params = { screen_name: 'addiesgjohnson', count: 20 };
     twitter.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi", params, function (error, tweets, response) {
       if (!error) {
-        tweets = (JSON.parse(response.body)); 
-        console.log(tweets[1].text);
+        tweets = (JSON.parse(response.body));
+        // console.log(tweets[1].text);
 
         for (var i = 0; i < tweets.length; i++) {
           console.log(
-          "\nTweet: " + tweets[i].text +
-          "\nTweet Date: " + tweets[i].created_at
-        )
+            "\nTweet: " + tweets[i].text +
+            "\nTweet Date: " + tweets[i].created_at
+          )
         }
-
-        // console.log(
-        //   "\nTweet: " + response.text +
-        //   "\nTweet Date: " + response.created_at
-        // )
       }
     })
   }
@@ -92,35 +87,35 @@ var LiriSearch = function () {
 
 
         if (stuff.Error === 'Movie not found!') {
-          console.log("Movie not found - enter new request"); 
+          console.log("Movie not found - enter new request");
         }
         else {
-        array = stuff.Ratings;
+          array = stuff.Ratings;
 
-        console.log(stuff); 
+          console.log(stuff);
 
-        function search(nameKey, myArray) {
-          for (var i = 0; i < myArray.length; i++) {
-            if (myArray[i].Source === nameKey) {
-              return myArray[i];
+          function search(nameKey, myArray) {
+            for (var i = 0; i < myArray.length; i++) {
+              if (myArray[i].Source === nameKey) {
+                return myArray[i];
+              }
             }
           }
-        }
-        var resultObject = search("Rotten Tomatoes", array);
+          var resultObject = search("Rotten Tomatoes", array);
 
-        console.log(
-          "\nMovie Title: " + stuff.Title +
-          "\nRelease Year: " + stuff.Year +
-          "\nIMDB Rating: " + stuff.imdbRating +
-          "\nRotten Tomatoes: " + resultObject.Value +
-          "\nCountry produced: " + stuff.Country +
-          "\nLanguage: " + stuff.Language +
-          "\nPlot: " + stuff.Plot +
-          "\nActors: " + stuff.Actors)
+          console.log(
+            "\nMovie Title: " + stuff.Title +
+            "\nRelease Year: " + stuff.Year +
+            "\nIMDB Rating: " + stuff.imdbRating +
+            "\nRotten Tomatoes: " + resultObject.Value +
+            "\nCountry produced: " + stuff.Country +
+            "\nLanguage: " + stuff.Language +
+            "\nPlot: " + stuff.Plot +
+            "\nActors: " + stuff.Actors)
         }
       });
-    
-    
+
+
     });
   } //this.movie end
 
