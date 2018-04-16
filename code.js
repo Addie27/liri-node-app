@@ -16,7 +16,20 @@ var LiriSearch = function () {
     var params = { screen_name: 'addiesgjohnson', count: 20 };
     twitter.get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=twitterapi", params, function (error, tweets, response) {
       if (!error) {
-        console.log(tweets);
+        tweets = (JSON.parse(response.body)); 
+        console.log(tweets[1].text);
+
+        for (var i = 0; i < tweets.length; i++) {
+          console.log(
+          "\nTweet: " + tweets[i].text +
+          "\nTweet Date: " + tweets[i].created_at
+        )
+        }
+
+        // console.log(
+        //   "\nTweet: " + response.text +
+        //   "\nTweet Date: " + response.created_at
+        // )
       }
     })
   }
