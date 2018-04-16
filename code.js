@@ -82,14 +82,21 @@ var LiriSearch = function () {
       if (error) {
         return console.log(error);
       }
-
+      
       var movieData = movie.slice(11);
 
       request("https://www.omdbapi.com/?t=" + movieData + "&y=&plot=short&apikey=trilogy", function (error, response) {
-        // console.log(JSON.stringify(response, null, 2));
         var stuff = JSON.parse(response.body);
+        // console.log(stuff.Error);
 
+
+        if (stuff.Error === 'Movie not found!') {
+          console.log("Movie not found - enter new request"); 
+        }
+        else {
         array = stuff.Ratings;
+
+        console.log(stuff); 
 
         function search(nameKey, myArray) {
           for (var i = 0; i < myArray.length; i++) {
@@ -109,9 +116,10 @@ var LiriSearch = function () {
           "\nLanguage: " + stuff.Language +
           "\nPlot: " + stuff.Plot +
           "\nActors: " + stuff.Actors)
-
+        }
       });
-
+    
+    
     });
   } //this.movie end
 
